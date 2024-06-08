@@ -1,9 +1,9 @@
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
 
-export const Container = ({ children }: { children: React.ReactNode }) => {
-  return <SafeAreaView className={styles.container}>{children}</SafeAreaView>;
-};
+export default function ({ children }: { children: React.ReactNode }) {
+  return <View className={styles.container}>{children}</View>;
+}
 
 const styles = {
-  container: 'flex flex-1 p-6',
+  container: 'flex mr-6 ml-6',
 };
