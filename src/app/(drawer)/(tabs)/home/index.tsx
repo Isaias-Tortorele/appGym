@@ -9,10 +9,8 @@ export default function Page() {
     <>
       <Header />
       <Container>
-        <View>
-          <Button titleButton="Montar meu treino" title="Criar rotina" className="mt-10" />
-          <LastWorkout titleButton="Perna" title="Último treino" />
-        </View>
+        <Button className="mt-10" titleButton="Montar meu treino" title="Criar rotina" />
+        <LastWorkout titleButton="Perna" title="Último treino" />
       </Container>
     </>
   );
