@@ -7,7 +7,7 @@ interface ButtonProps extends TouchableOpacityProps {
   className?: string;
 }
 
-export default function Button({ onPress, title, titleButton, className }: ButtonProps) {
+export function Button({ onPress, title, titleButton, className }: ButtonProps) {
   return (
     <View className={`mb-6 ${className}`}>
       <Text className="text-xl font-semibold">{title}</Text>
