@@ -1,3 +1,5 @@
+import '../../global.css';
+
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
@@ -8,7 +10,7 @@ export default function Page() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 10000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
