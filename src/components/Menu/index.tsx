@@ -2,10 +2,10 @@ import { View, StatusBar, TouchableOpacity } from 'react-native';
 
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 
-import Container from './Container';
+import Container from '../ui/Container';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function Header() {
+export function Menu() {
   const navigation = useNavigation();
 
   const openDrawer = () => {
