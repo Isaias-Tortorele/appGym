@@ -10,11 +10,11 @@ export default function Page() {
     <>
       <Menu />
       <Container>
-        <Button className="mt-10" titleButton="Montar meu treino" title="Criar rotina" />
+        <Button className="mt-10 mb-6" titleButton="Montar meu treino" title="Criar rotina" />
         <LastWorkout titleButton="Perna" title="Último treino" />
 
         <View>
-          <Text className="mt-6 text-lg font-bold">Minhas rotinas</Text>
+          <Text className="mt-5 text-lg font-bold color-text-900">Minhas rotinas</Text>
           <ListRoutines />
           <ListRoutines />
         </View>

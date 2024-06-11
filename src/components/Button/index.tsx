@@ -10,12 +10,12 @@ interface ButtonProps extends TouchableOpacityProps {
 
 export function Button({ onPress, title, titleButton, className, borderColor }: ButtonProps) {
   return (
-    <View className={`mb-6 ${className}`}>
-      <Text className="text-xl font-semibold">{title}</Text>
+    <View className={`${className}`}>
+      <Text className="text-xl font-semibold color-text-900">{title}</Text>
       <TouchableOpacity
-        className={`h-14 items-center justify-center rounded-md border-2 ${borderColor ? borderColor : 'border-slate-400'}`}
+        className={`h-14 items-center justify-center rounded-md border-2 ${borderColor ? borderColor : 'border-border-400'}`}
         onPress={onPress}>
-        <Text className="color-slate-700 text-lg font-semibold">{titleButton}</Text>
+        <Text className="text-lg font-semibold color-text-600">{titleButton}</Text>
       </TouchableOpacity>
     </View>
   );
