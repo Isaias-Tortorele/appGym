@@ -5,5 +5,5 @@ export default function ({ children }: { children: React.ReactNode }) {
 }
 
 const styles = {
-  container: 'flex mr-6 ml-6',
+  container: 'mr-6 ml-6',
 };

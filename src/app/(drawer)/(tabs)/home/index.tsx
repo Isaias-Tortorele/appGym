@@ -5,6 +5,7 @@ import LastWorkout from '~/components/LastWorkout';
 import { ListRoutines } from '~/components/ListRoutines';
 import { Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { DrawerToggleButton } from "@react-navigation/drawer";
 
 export default function Page() {
   const router = useRouter();
