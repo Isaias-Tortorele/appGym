@@ -4,7 +4,7 @@ import { useNavigation } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Container from '~/components/ui/Container';
 
-export default function registerTo() {
+export default function RegisterTo() {
   const navigation = useNavigation();
 
   const goBack = () => {
