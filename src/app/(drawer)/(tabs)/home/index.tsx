@@ -1,11 +1,11 @@
-import { Button } from '~/components/Button';
+import Button from '~/components/Button';
 import Container from '~/components/ui/Container';
-import { Menu } from '~/components/Menu';
+import Menu from '~/components/Menu';
 import LastWorkout from '~/components/LastWorkout';
-import { ListRoutines } from '~/components/ListRoutines';
+import ListRoutines from '~/components/ListRoutines';
 import { Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { DrawerToggleButton } from "@react-navigation/drawer";
+import { DrawerToggleButton } from '@react-navigation/drawer';
 
 export default function Page() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function Page() {
         <LastWorkout titleButton="Perna" title="Último treino" />
 
         <View>
-          <Text className="color-text-900 mt-5 text-lg font-bold">Minhas rotinas</Text>
+          <Text className="mt-5 text-lg font-bold color-text-900">Minhas rotinas</Text>
           <ListRoutines />
           <ListRoutines />
         </View>

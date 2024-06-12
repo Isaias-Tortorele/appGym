@@ -5,7 +5,7 @@ import { useNavigation, DrawerActions } from '@react-navigation/native';
 import Container from '../ui/Container';
 import { Ionicons } from '@expo/vector-icons';
 
-export function Menu() {
+export default function Menu() {
   const navigation = useNavigation();
 
   const openDrawer = () => {
