@@ -20,6 +20,9 @@ module.exports = {
           500: '#06B6D4',
         },
       },
+      backgroundColor: {
+        'black-50': 'rgba(0, 0, 0, 0.5)',
+      },
     },
   },
   plugins: [],
