@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import React from 'react';
-import { useNavigation } from 'expo-router';
-import { FontAwesome6 } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, FlatList, Button } from 'react-native';
 import Container from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
+import CustomModal from '~/components/Modal';
+import GoBack from '../components/GoBack';
+import { Input } from '~/components/ui/Input';
 
 const DATA = [
   {
@@ -27,25 +28,33 @@ const DATA = [
 ];
 
 export default function Exercises() {
-  const navigation = useNavigation();
+  const [inputText, onChangeText] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const goBack = () => {
-    navigation.goBack();
+  const openModal = () => {
+    setModalVisible(true);
   };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <Container>
-      <View className="pt-10">
-        <TouchableOpacity className="pt-1" onPress={goBack}>
-          <FontAwesome6 name="arrow-left" size={30} />
-        </TouchableOpacity>
-        <Text>Exercises</Text>
-
-        <FlatList
-          data={DATA}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ExerciseList data={item} />}
-        />
+      <GoBack />
+      <View className="flex pb-5 ">
+        <Input placeholder="Busca exercícios" value={inputText} onChangeText={onChangeText}/>
       </View>
+
+      <FlatList
+        data={DATA}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <ExerciseList data={item} />}
+      />
+      <Button title="Open Modal" onPress={openModal} />
+      <CustomModal visible={modalVisible} onClose={closeModal}>
+        <Text>This is a custom modal!</Text>
+      </CustomModal>
     </Container>
   );
 }
