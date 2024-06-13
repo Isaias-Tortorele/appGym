@@ -1,25 +1,17 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import Container from '~/components/ui/Container';
-import Menu from '~/components/Menu';
 import Button from '~/components/Button';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { router, useNavigation } from 'expo-router';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { router } from 'expo-router';
+import GoBack from '../components/GoBack';
 
 export default function Register() {
-  const navigation = useNavigation();
-
-  const goBack = () => {
-    navigation.goBack();
-  };
   return (
     <>
       <Container>
         <View className="pt-10">
-          <TouchableOpacity className="pt-1" onPress={goBack}>
-            <FontAwesome6 name="arrow-left" size={30} />
-          </TouchableOpacity>
+          <GoBack />
           <View className="mt-24 rounded-md border-2 border-border-50 p-4">
             <View className="items-center justify-center">
               <FontAwesome6 name="dumbbell" size={40} color="black" />
