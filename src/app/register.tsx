@@ -29,7 +29,7 @@ export default function Register() {
             <Button
               titleButton="Adicionar exercícios"
               borderColor="border-border-800"
-              onPress={() => router.push('/registerTo')}
+              onPress={() => router.push('/exercises')}
             />
           </View>
         </View>
