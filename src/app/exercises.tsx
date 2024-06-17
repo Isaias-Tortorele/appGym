@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
 import Container from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
 import CustomModal from '~/components/Modal';
@@ -42,8 +42,20 @@ export default function Exercises() {
   return (
     <Container>
       <GoBack />
-      <View className="flex pb-5 ">
-        <Input placeholder="Busca exercícios" value={inputText} onChangeText={onChangeText}/>
+      <View className="pb-3 ">
+        <Input
+          placeholder="busca exercícios"
+          value={inputText}
+          onChangeText={onChangeText}
+          label="Busque algum exercício"
+        />
+      </View>
+      <View className="pb-3 items-center justify-center">
+        <TouchableOpacity
+          className={`items-center justify-center rounded-md border border-border-400 w-3/5`}
+          onPress={openModal}>
+          <Text className="text-lg color-text-600">Painel muscular</Text>
+        </TouchableOpacity>
       </View>
 
       <FlatList
