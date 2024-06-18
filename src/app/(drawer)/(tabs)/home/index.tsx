@@ -13,12 +13,13 @@ export default function Page() {
     <>
       <Menu />
       <Container>
-        <Button
-          className="mb-6 mt-10"
-          titleButton="Montar meu treino"
-          title="Criar rotina"
-          onPress={() => router.push('/register')}
-        />
+        <View className="pb-6 pt-10">
+          <Button
+            titleButton="Montar meu treino"
+            title="Criar rotina"
+            onPress={() => router.push('/register')}
+          />
+        </View>
 
         <LastWorkout titleButton="Perna" title="Último treino" />
 

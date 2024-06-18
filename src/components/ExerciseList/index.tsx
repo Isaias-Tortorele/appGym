@@ -6,7 +6,7 @@ import { Avatar, AvatarImage } from '../ui/Avatar';
 
 export default function ExerciseList({ data }: any) {
   return (
-    <View className="m-1 mb-4 rounded-3xl bg-gray-200 px-4 shadow-md shadow-black">
+    <View className="m-1 mb-4 rounded-3xl bg-slate-100 px-4 shadow-sm shadow-slate-400">
       <View className="h-16 flex-row items-center justify-between">
         <View className="flex flex-row items-center justify-center gap-4">
           <Avatar className="h-14 w-14">

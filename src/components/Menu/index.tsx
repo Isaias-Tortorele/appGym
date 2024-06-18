@@ -14,10 +14,10 @@ export default function Menu() {
 
   return (
     <>
-      <View className=" rounded-b-3xl bg-[#0F172A] pb-5 pt-5">
+      <View className=" rounded-b-3xl bg-[#0F172A] pb-5 pt-5 ">
         <StatusBar barStyle={'light-content'} backgroundColor={'#0F172A'} translucent={false} />
         <Container>
-          <TouchableOpacity onPress={openDrawer}>
+          <TouchableOpacity onPress={openDrawer} className="h-11 w-11">
             <Ionicons name="menu" size={40} color={'white'} />
           </TouchableOpacity>
         </Container>
