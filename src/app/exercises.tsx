@@ -43,27 +43,30 @@ export default function Exercises() {
   return (
     <Container>
       <GoBack />
-      <View className="pb-3 ">
-        <Input
-          placeholder="busca exercícios"
-          value={inputText}
-          onChangeText={onChangeText}
-          label="Busque algum exercício"
-        />
-      </View>
+      <Input
+        placeholder="busca exercícios"
+        value={inputText}
+        onChangeText={onChangeText}
+        label="Busque algum exercício"
+        className="pb-3"
+      />
+
       <View className="items-center justify-center pb-3">
         <TouchableOpacity
           className={`w-3/5 items-center justify-center rounded-md border border-border-400`}
           onPress={openModal}>
-          <Text className="text-lg color-text-600">Painel muscular</Text>
+          <Text className="text-md color-text-600">Painel muscular</Text>
         </TouchableOpacity>
       </View>
+
       <FlatList
+        className="h-3/5"
         data={DATA}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <ExerciseList data={item} />}
       />
-      <View className="flex items-center justify-center">
+
+      <View className="items-center">
         <Button
           titleButton="Adicionar exercícios"
           className="w-4/5"
@@ -71,7 +74,7 @@ export default function Exercises() {
           textStyle="text-white"
         />
       </View>
-      
+
       <CustomModal visible={modalVisible} onClose={closeModal} />
     </Container>
   );

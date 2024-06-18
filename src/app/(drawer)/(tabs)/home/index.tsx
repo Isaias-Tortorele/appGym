@@ -13,7 +13,7 @@ export default function Page() {
     <>
       <Menu />
       <Container>
-        <View className="pb-6 pt-10">
+        <View className="pb-5 pt-10">
           <Button
             titleButton="Montar meu treino"
             title="Criar rotina"

@@ -11,8 +11,8 @@ export default function GoBack() {
   };
 
   return (
-    <View className="py-10">
-      <TouchableOpacity className="h-10 w-10 justify-center items-center" onPress={goBack}>
+    <View className="pb-5 pt-10">
+      <TouchableOpacity className="h-10 w-10 items-center justify-center" onPress={goBack}>
         <FontAwesome6 name="arrow-left" size={30} />
       </TouchableOpacity>
     </View>
