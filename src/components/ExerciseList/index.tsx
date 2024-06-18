@@ -1,12 +1,22 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Avatar, AvatarImage } from '../ui/Avatar';
 
-export default function ExerciseList({ data }: any) {
+type DataProps = {
+  id: string;
+  url_gif: string;
+  title: string;
+};
+
+type ExerciseListProps = {
+  data: DataProps;
+};
+
+export default function ExerciseList({ data }: ExerciseListProps) {
   return (
-    <View className="m-1 mb-4 rounded-3xl bg-slate-100 px-4 shadow-sm shadow-slate-400">
+    <View className="m-1 mb-4 rounded-3xl border-x-2 border-b-2 border-slate-300 bg-slate-100 px-4 shadow-sm shadow-slate-400">
       <View className="h-16 flex-row items-center justify-between">
         <View className="flex flex-row items-center justify-center gap-4">
           <Avatar className="h-14 w-14">
@@ -14,6 +24,7 @@ export default function ExerciseList({ data }: any) {
               source={{
                 uri: data.url_gif,
               }}
+              resizeMode="cover"
             />
           </Avatar>
           <Text className="text-lg font-semibold">{data.title}</Text>
