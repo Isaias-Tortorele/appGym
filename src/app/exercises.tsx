@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import Container from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
 import CustomModal from '~/components/Modal';
 import GoBack from '../components/GoBack';
+import Button from '~/components/Button';
 import { Input } from '~/components/ui/Input';
 
 const DATA = [
@@ -50,23 +51,28 @@ export default function Exercises() {
           label="Busque algum exercício"
         />
       </View>
-      <View className="pb-3 items-center justify-center">
+      <View className="items-center justify-center pb-3">
         <TouchableOpacity
-          className={`items-center justify-center rounded-md border border-border-400 w-3/5`}
+          className={`w-3/5 items-center justify-center rounded-md border border-border-400`}
           onPress={openModal}>
           <Text className="text-lg color-text-600">Painel muscular</Text>
         </TouchableOpacity>
       </View>
-
       <FlatList
         data={DATA}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <ExerciseList data={item} />}
       />
-      <Button title="Open Modal" onPress={openModal} />
-      <CustomModal visible={modalVisible} onClose={closeModal}>
-        <Text>This is a custom modal!</Text>
-      </CustomModal>
+      <View className="flex items-center justify-center">
+        <Button
+          titleButton="Adicionar exercícios"
+          className="w-4/5"
+          touchableStyle="bg-cyan-400 border-none"
+          textStyle="text-white"
+        />
+      </View>
+      
+      <CustomModal visible={modalVisible} onClose={closeModal} />
     </Container>
   );
 }
