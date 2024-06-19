@@ -6,6 +6,7 @@ import CustomModal from '~/components/Modal';
 import GoBack from '../components/GoBack';
 import Button from '~/components/Button';
 import { Input } from '~/components/ui/Input';
+import { router } from 'expo-router';
 
 const DATA = [
   {
@@ -60,16 +61,10 @@ const DATA = [
 export default function Exercises() {
   const [exerciseSearch, setExerciseSearch] = useState('');
   const [namePlan, setNamePlan] = useState('');
-
   const [modalVisible, setModalVisible] = useState(false);
 
-  const openModal = () => {
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
 
   return (
     <Container>
@@ -114,6 +109,7 @@ export default function Exercises() {
           className="w-4/5"
           touchableStyle="bg-cyan-400 border-none"
           textStyle="text-white"
+          onPress={() => router.push('/workoutPlan')}
         />
       </View>
 
