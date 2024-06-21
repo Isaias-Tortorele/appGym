@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Container from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
 import CustomModal from '~/components/Modal';
@@ -9,7 +9,7 @@ import { Input } from '~/components/ui/Input';
 import { useRouter } from 'expo-router';
 import { useExercise } from '~/contexts/ExerciseContext';
 
-import { getAllExercises, getExercises } from '~/utils/api';
+import { getAllExercises } from '~/utils/api';
 
 type Exercise = {
   id: string;
@@ -24,6 +24,9 @@ export default function Exercises() {
   const [namePlan, setNamePlan] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   const { selectedExercises, toggleExerciseSelection } = useExercise();
 
@@ -35,18 +38,31 @@ export default function Exercises() {
       params: { namePlan },
     });
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        const exercisesData = await getAllExercises();
-        setExercises(exercisesData);
-      } catch (error) {
-        console.error('Error fetching exercises:', error);
+  const fetchExercises = async (page: number) => {
+    setLoading(true);
+    try {
+      const exercisesData = await getAllExercises(page, 10);
+      if (exercisesData.length > 0) {
+        setExercises((prevExercises) => [...prevExercises, ...exercisesData]);
+      } else {
+        setHasMore(false);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching exercises:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchExercises();
-  }, []);
+  useEffect(() => {
+    fetchExercises(page);
+  }, [page]);
+
+  const handleLoadMore = () => {
+    if (!loading && hasMore) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
 
   return (
     <Container>
@@ -89,6 +105,9 @@ export default function Exercises() {
             toggleExerciseSelection={toggleExerciseSelection}
           />
         )}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={loading ? <ActivityIndicator size="large" color="#0000ff" /> : null}
       />
 
       <View className="absolute bottom-0 w-full items-center pb-5">
