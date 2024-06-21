@@ -2,14 +2,13 @@ import '../../global.css';
 
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ExerciseProvider } from '~/contexts/ExerciseContext';
-
+import { CombinedProvider } from '~/contexts/CombinedProvider';
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ExerciseProvider>
+      <CombinedProvider>
         <Stack screenOptions={{ headerShown: false }} />
-      </ExerciseProvider>
+      </CombinedProvider>
     </GestureHandlerRootView>
   );
 }

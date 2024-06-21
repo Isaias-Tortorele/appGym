@@ -47,7 +47,11 @@ export default function Exercises() {
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-  const handleAddExercises = () => router.push('/workoutPlan');
+  const handleAddExercises = () =>
+    router.push({
+      pathname: '/workoutPlan',
+      params: { namePlan },
+    });
 
   return (
     <Container>

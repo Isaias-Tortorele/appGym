@@ -1,21 +1,34 @@
 import React from 'react';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import Container from '~/components/ui/Container';
 import Button from '~/components/Button';
 import { ScrollView, Text, View } from 'react-native';
 import { Avatar, AvatarImage } from '~/components/ui/Avatar';
 import { useExercise } from '~/contexts/ExerciseContext';
+import { useRoutines } from '~/contexts/RoutinesContext';
 
 export default function WorkoutPlan() {
   const { selectedExercises } = useExercise();
+  const { addRoutine } = useRoutines();
 
-  const handleStartWorkout = () => router.push('/home');
+  const params = useLocalSearchParams();
+  const namePlan = Array.isArray(params.namePlan) ? params.namePlan[0] : params.namePlan;
+
+  const handleStartWorkout = () => {
+    if (namePlan) {
+      addRoutine(namePlan, selectedExercises);
+      router.push('/home');
+    } else {
+      // Tratar caso namePlan seja undefined
+      console.error('Name plan is undefined');
+    }
+  };
   const handleEditWorkout = () => router.push('/exercises');
 
   return (
     <Container>
       <View className="mt-20">
-        <Text className="mb-4 text-xl font-semibold">Ficha: Perna</Text>
+        <Text className="mb-4 text-xl font-semibold">Ficha: {namePlan}</Text>
         <ScrollView className="max-h-[70%] min-h-[70%]">
           {selectedExercises.map((exercise) => (
             <View
@@ -35,14 +48,12 @@ export default function WorkoutPlan() {
 
         <Button
           titleButton="Editar treino"
-          className=""
           touchableStyle="border-2"
           textStyle="text-text-600"
           onPress={handleEditWorkout}
         />
         <Button
           titleButton="Salvar treino"
-          className=""
           touchableStyle="bg-cyan-400 border-none"
           textStyle="text-white"
           onPress={handleStartWorkout}
