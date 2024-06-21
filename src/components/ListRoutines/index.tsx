@@ -18,8 +18,8 @@ export default function ListRoutines() {
                 <Ionicons name="ellipsis-vertical" size={24} color="black" />
               </TouchableOpacity>
             </View>
-            <Text className="color-text-600">
-              {routine.exercises.map((exercise) => exercise.title).join(', ')}
+            <Text className="color-text-600 mr-6" numberOfLines={2} ellipsizeMode="tail">
+              {routine.exercises.map((exercise) => exercise.name).join(', ')}
             </Text>
           </View>
           <Button titleButton="Iniciar treino" className="-mt-5" borderColor="border-border-800" />

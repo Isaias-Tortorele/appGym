@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Avatar, AvatarImage } from '../ui/Avatar';
 
 type DataProps = {
   id: string;
   url_gif: string;
-  title: string;
+  name: string;
 };
 
 type ExerciseListProps = {
@@ -23,13 +23,17 @@ export default function ExerciseList({
   const isSelected = selectedExercises.some((exercise) => exercise.id === data.id);
 
   return (
-    <View className="m-1 mb-4 rounded-3xl border-x-2 border-b-2 border-slate-300 bg-slate-100 px-4 shadow-sm shadow-slate-400">
+    <View
+      className="m-1 mb-4 rounded-3xl border-x-2 border-b-2 border-slate-300 bg-slate-100 px-4 shadow-sm shadow-slate-400"
+      key={data.id}>
       <View className="h-16 flex-row items-center justify-between">
         <View className="flex flex-row items-center justify-center gap-4">
           <Avatar className="h-14 w-14">
             <AvatarImage source={{ uri: data.url_gif }} resizeMode="cover" />
           </Avatar>
-          <Text className="text-lg font-semibold">{data.title}</Text>
+          <Text className="max-w-60 text-lg font-semibold" numberOfLines={1} ellipsizeMode="tail">
+            {data.name}
+          </Text>
         </View>
         <TouchableOpacity onPress={() => toggleExerciseSelection(data)}>
           <MaterialIcons
@@ -42,3 +46,7 @@ export default function ExerciseList({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  text: {},
+});

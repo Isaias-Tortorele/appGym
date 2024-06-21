@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import Container from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
@@ -9,32 +9,13 @@ import { Input } from '~/components/ui/Input';
 import { useRouter } from 'expo-router';
 import { useExercise } from '~/contexts/ExerciseContext';
 
+import { getAllExercises, getExercises } from '~/utils/api';
+
 type Exercise = {
   id: string;
-  title: string;
+  name: string;
   url_gif: string;
 };
-
-const DATA: Exercise[] = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-    url_gif:
-      'https://firebasestorage.googleapis.com/v0/b/appgym-b2902.appspot.com/o/abdomen%2FAbdominal%20bicicleta.gif?alt=media&token=4a760c47-679d-4326-bf7e-b613c59b1ae3',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-    url_gif:
-      'https://firebasestorage.googleapis.com/v0/b/appgym-b2902.appspot.com/o/abdomen%2FAbdominal%20calcanhar.gif?alt=media&token=af355b17-60ab-46b5-b1fd-eadb54821dda',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145a571e29d72',
-    title: 'Third Item',
-    url_gif:
-      'https://firebasestorage.googleapis.com/v0/b/appgym-b2902.appspot.com/o/abdomen%2FAbdominal%20Canivete.gif?alt=media&token=9d708e8d-9092-46d9-88ec-8ddb2f74d5eb',
-  },
-];
 
 export default function Exercises() {
   const router = useRouter();
@@ -42,6 +23,7 @@ export default function Exercises() {
   const [exerciseSearch, setExerciseSearch] = useState('');
   const [namePlan, setNamePlan] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
   const { selectedExercises, toggleExerciseSelection } = useExercise();
 
@@ -52,6 +34,19 @@ export default function Exercises() {
       pathname: '/workoutPlan',
       params: { namePlan },
     });
+
+  useEffect(() => {
+    const fetchExercises = async () => {
+      try {
+        const exercisesData = await getAllExercises();
+        setExercises(exercisesData);
+      } catch (error) {
+        console.error('Error fetching exercises:', error);
+      }
+    };
+
+    fetchExercises();
+  }, []);
 
   return (
     <Container>
@@ -85,7 +80,7 @@ export default function Exercises() {
         className="h-4/6"
         contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
-        data={DATA}
+        data={exercises}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ExerciseList

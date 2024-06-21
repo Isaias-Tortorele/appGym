@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Exercise = {
   id: string;
-  title: string;
+  name: string;
   url_gif: string;
 };
 

@@ -39,7 +39,7 @@ export default function WorkoutPlan() {
                   <Avatar className="h-14 w-14">
                     <AvatarImage source={{ uri: exercise.url_gif }} resizeMode="cover" />
                   </Avatar>
-                  <Text className="text-lg font-semibold">{exercise.title}</Text>
+                  <Text className="text-lg font-semibold">{exercise.name}</Text>
                 </View>
               </View>
             </View>
