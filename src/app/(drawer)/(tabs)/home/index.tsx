@@ -5,7 +5,6 @@ import LastWorkout from '~/components/LastWorkout';
 import ListRoutines from '~/components/ListRoutines';
 import { Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { DrawerToggleButton } from '@react-navigation/drawer';
 
 export default function Page() {
   const router = useRouter();
@@ -15,9 +14,9 @@ export default function Page() {
       <Container>
         <View className="pb-5 pt-10">
           <Button
-            titleButton="Montar meu treino"
+            titleButton="Montar ficha de treino"
             title="Criar rotina"
-            onPress={() => router.push('/register')}
+            onPress={() => router.push('/exercises')}
           />
         </View>
 
@@ -25,7 +24,6 @@ export default function Page() {
 
         <View>
           <Text className="mt-5 text-lg font-bold color-text-900">Minhas rotinas</Text>
-          <ListRoutines />
           <ListRoutines />
         </View>
       </Container>
