@@ -32,11 +32,12 @@ export default function Exercises() {
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-  const handleAddExercises = () =>
+  const handleAddExercises = () => {
     router.push({
       pathname: '/workoutPlan',
       params: { namePlan },
     });
+  };
 
   const fetchExercises = async (page: number) => {
     setLoading(true);

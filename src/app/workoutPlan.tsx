@@ -19,7 +19,6 @@ export default function WorkoutPlan() {
       addRoutine(namePlan, selectedExercises);
       router.push('/home');
     } else {
-      // Tratar caso namePlan seja undefined
       console.error('Name plan is undefined');
     }
   };
