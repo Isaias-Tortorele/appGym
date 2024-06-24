@@ -14,7 +14,6 @@ type Routine = {
 type RoutinesContextType = {
   routines: Routine[];
   addRoutine: (name: string, exercises: Exercise[]) => void;
-  updateRoutine: (name: string, exercises: Exercise[]) => void; // Adicione a função updateRoutine
 };
 
 const RoutinesContext = createContext<RoutinesContextType | undefined>(undefined);
@@ -26,14 +25,8 @@ export const RoutinesProvider = ({ children }: { children: ReactNode }) => {
     setRoutines((prevRoutines) => [...prevRoutines, { name, exercises }]);
   };
 
-  const updateRoutine = (name: string, exercises: Exercise[]) => {
-    setRoutines((prevRoutines) =>
-      prevRoutines.map((routine) => (routine.name === name ? { ...routine, exercises } : routine))
-    );
-  };
-
   return (
-    <RoutinesContext.Provider value={{ routines, addRoutine, updateRoutine }}>
+    <RoutinesContext.Provider value={{ routines, addRoutine }}>
       {children}
     </RoutinesContext.Provider>
   );

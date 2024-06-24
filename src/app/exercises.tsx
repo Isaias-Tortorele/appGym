@@ -3,10 +3,10 @@ import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react
 import Container from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
 import CustomModal from '~/components/Modal';
-import GoBack from '../components/GoBack';
+import GoBack from '~/components/GoBack';
 import Button from '~/components/Button';
 import { Input } from '~/components/ui/Input';
-import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useExercise } from '~/contexts/ExerciseContext';
 
 import { getAllExercises } from '~/utils/api';
@@ -19,18 +19,16 @@ type Exercise = {
 
 export default function Exercises() {
   const router = useRouter();
-  const params = useLocalSearchParams();
-  const routine = params.routine ? JSON.parse(params.routine as string) : null;
 
   const [exerciseSearch, setExerciseSearch] = useState('');
-  const [namePlan, setNamePlan] = useState(routine ? routine.name : '');
+  const [namePlan, setNamePlan] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const { selectedExercises, setSelectedExercises, toggleExerciseSelection } = useExercise();
+  const { selectedExercises, toggleExerciseSelection } = useExercise();
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);

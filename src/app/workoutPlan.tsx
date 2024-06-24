@@ -9,34 +9,18 @@ import { useRoutines } from '~/contexts/RoutinesContext';
 
 export default function WorkoutPlan() {
   const { selectedExercises } = useExercise();
-  const { routines, addRoutine, updateRoutine } = useRoutines(); // Adicione o método updateRoutine
+  const { routines, addRoutine } = useRoutines();
 
   const params = useLocalSearchParams();
   const namePlan = Array.isArray(params.namePlan) ? params.namePlan[0] : params.namePlan;
-  const exercises = params.exercises ? JSON.parse(params.exercises as string) : [];
 
   const handleStartWorkout = () => {
     if (namePlan) {
-      const existingRoutine = routines.find((routine) => routine.name === namePlan);
-
-      if (existingRoutine) {
-        // Treino já existe, atualize os exercícios
-        updateRoutine(existingRoutine.name, selectedExercises);
-      } else {
-        // Treino não existe, adicione um novo
-        addRoutine(namePlan, selectedExercises);
-      }
-
+      addRoutine(namePlan, selectedExercises);
       router.push('/home');
     } else {
       console.error('Name plan is undefined');
     }
-  };
-  const handleEditWorkout = () => {
-    router.push({
-      pathname: '/exercises',
-      params: { routine: JSON.stringify({ name: namePlan, exercises }) },
-    });
   };
 
   return (
@@ -60,12 +44,6 @@ export default function WorkoutPlan() {
           ))}
         </ScrollView>
 
-        <Button
-          titleButton="Editar treino"
-          touchableStyle="border-2"
-          textStyle="text-text-600"
-          onPress={handleEditWorkout}
-        />
         <Button
           titleButton="Salvar treino"
           touchableStyle="bg-cyan-400 border-none"
