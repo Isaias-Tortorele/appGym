@@ -9,20 +9,35 @@ import { useRoutines } from '~/contexts/RoutinesContext';
 
 export default function WorkoutPlan() {
   const { selectedExercises } = useExercise();
-  const { addRoutine } = useRoutines();
+  const { routines, addRoutine, updateRoutine } = useRoutines(); // Adicione o método updateRoutine
 
   const params = useLocalSearchParams();
   const namePlan = Array.isArray(params.namePlan) ? params.namePlan[0] : params.namePlan;
+  const exercises = params.exercises ? JSON.parse(params.exercises as string) : [];
 
   const handleStartWorkout = () => {
     if (namePlan) {
-      addRoutine(namePlan, selectedExercises);
+      const existingRoutine = routines.find((routine) => routine.name === namePlan);
+
+      if (existingRoutine) {
+        // Treino já existe, atualize os exercícios
+        updateRoutine(existingRoutine.name, selectedExercises);
+      } else {
+        // Treino não existe, adicione um novo
+        addRoutine(namePlan, selectedExercises);
+      }
+
       router.push('/home');
     } else {
       console.error('Name plan is undefined');
     }
   };
-  const handleEditWorkout = () => router.push('/exercises');
+  const handleEditWorkout = () => {
+    router.push({
+      pathname: '/exercises',
+      params: { routine: JSON.stringify({ name: namePlan, exercises }) },
+    });
+  };
 
   return (
     <Container>

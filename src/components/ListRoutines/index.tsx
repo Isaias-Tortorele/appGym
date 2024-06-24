@@ -3,9 +3,29 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Button from '../Button';
 import { Ionicons } from '@expo/vector-icons';
 import { useRoutines } from '~/contexts/RoutinesContext';
+import { useRouter } from 'expo-router';
+
+type Exercise = {
+  id: string;
+  name: string;
+  url_gif: string;
+};
+
+type Routine = {
+  name: string;
+  exercises: Exercise[];
+};
 
 export default function ListRoutines() {
   const { routines } = useRoutines();
+  const router = useRouter();
+
+  const handleEllipsisPress = (routine: Routine) => {
+    router.push({
+      pathname: '/workoutPlan',
+      params: { namePlan: routine.name, exercises: JSON.stringify(routine.exercises) },
+    });
+  };
 
   return (
     <>
@@ -14,11 +34,11 @@ export default function ListRoutines() {
           <View>
             <View className="flex flex-row justify-between">
               <Text className="text-lg font-bold color-text-900">{routine.name}</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleEllipsisPress(routine)}>
                 <Ionicons name="ellipsis-vertical" size={24} color="black" />
               </TouchableOpacity>
             </View>
-            <Text className="color-text-600 mr-6" numberOfLines={2} ellipsizeMode="tail">
+            <Text className="mr-6 color-text-600" numberOfLines={2} ellipsizeMode="tail">
               {routine.exercises.map((exercise) => exercise.name).join(', ')}
             </Text>
           </View>

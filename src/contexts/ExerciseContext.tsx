@@ -8,7 +8,9 @@ type Exercise = {
 
 type ExerciseContextType = {
   selectedExercises: Exercise[];
+  setSelectedExercises: (exercises: Exercise[]) => void;
   toggleExerciseSelection: (exercise: Exercise) => void;
+  clearSelectedExercises: () => void;
 };
 
 const ExerciseContext = createContext<ExerciseContextType | undefined>(undefined);
@@ -26,8 +28,18 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const clearSelectedExercises = () => {
+    setSelectedExercises([]);
+  };
+
   return (
-    <ExerciseContext.Provider value={{ selectedExercises, toggleExerciseSelection }}>
+    <ExerciseContext.Provider
+      value={{
+        selectedExercises,
+        setSelectedExercises,
+        toggleExerciseSelection,
+        clearSelectedExercises,
+      }}>
       {children}
     </ExerciseContext.Provider>
   );
