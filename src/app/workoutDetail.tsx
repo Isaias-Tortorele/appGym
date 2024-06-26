@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { Avatar, AvatarImage } from '~/components/ui/Avatar';
 import Container from '~/components/ui/Container';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Checkbox } from '~/components/ui/Checkbox';
+import Separator from '~/components/ui/Separator';
 
 type Exercise = {
   id: string;
@@ -38,25 +38,31 @@ export default function WorkoutDetail() {
       <Container>
         <View className="pt-10">
           <Text className="text-sm font-medium text-text-600">Ficha: {routine.name}</Text>
-          <Text className="mb-5 text-xl font-semibold">Tempo de treino: </Text>
+          <Text className="mb-5 text-xl font-semibold">Tempo de treino: 36:59</Text>
           {routine.exercises.map((exercise: Exercise) => (
-            <View key={exercise.id} className="my-5 rounded-xl border-2 px-5">
+            <View key={exercise.id}>
               <View className="flex-row items-center gap-4">
                 <Avatar className="h-14 w-14">
                   <AvatarImage source={{ uri: exercise.url_gif }} />
                 </Avatar>
                 <Text className="text-xl font-semibold">{exercise.name}</Text>
               </View>
-              <Text>Tempo de descanso: 1:30s</Text>
+
+              <View className="flex-row items-center justify-between py-2 px-5">
+                <Text className=" font-semibold">Tempo de descanso: </Text>
+                <Text>1:30s</Text>
+              </View>
 
               {Array.from({ length: exercise.series }).map((_, index) => {
                 const key = `${exercise.id}-${index}`;
                 return (
-                  <View key={index} className="mx-1 flex-row items-center justify-between py-1.5">
+                  <View
+                    key={index}
+                    className={`flex-row items-center justify-between py-2 ${index % 2 === 1 ? 'bg-slate-200 px-5' : 'bg-white px-5'}`}>
                     <Text className="text-lg font-semibold">Série {index + 1}</Text>
-                    <Text className="text-lg font-semibold">-</Text>
+                    <Text className="text-lg">-</Text>
                     <Text className="text-lg font-semibold">{exercise.repetition} reps </Text>
-                    <Text className="text-lg font-normal">x</Text>
+                    <Text className="text-lg">x</Text>
                     <Text className="text-lg font-semibold">20 Kg</Text>
 
                     <Checkbox
@@ -67,6 +73,7 @@ export default function WorkoutDetail() {
                   </View>
                 );
               })}
+              <Separator />
             </View>
           ))}
         </View>
