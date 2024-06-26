@@ -3,7 +3,11 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 type Exercise = {
   id: string;
   name: string;
+  type: string;
   url_gif: string;
+  series: number;
+  repetition: string;
+  member: string;
 };
 
 type ExerciseContextType = {

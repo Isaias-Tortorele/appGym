@@ -3,7 +3,11 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 type Exercise = {
   id: string;
   name: string;
+  type: string;
   url_gif: string;
+  series: number;
+  repetition: string;
+  member: string;
 };
 
 type Routine = {
@@ -26,9 +30,7 @@ export const RoutinesProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <RoutinesContext.Provider value={{ routines, addRoutine }}>
-      {children}
-    </RoutinesContext.Provider>
+    <RoutinesContext.Provider value={{ routines, addRoutine }}>{children}</RoutinesContext.Provider>
   );
 };
 

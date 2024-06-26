@@ -14,7 +14,11 @@ import { getAllExercises } from '~/utils/api';
 type Exercise = {
   id: string;
   name: string;
+  type: string;
   url_gif: string;
+  series: number;
+  repetition: string;
+  member: string;
 };
 
 export default function Exercises() {
@@ -32,6 +36,7 @@ export default function Exercises() {
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
+
   const handleAddExercises = () => {
     router.push({
       pathname: '/workoutPlan',

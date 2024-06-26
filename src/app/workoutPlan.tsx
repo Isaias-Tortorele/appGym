@@ -9,7 +9,7 @@ import { useRoutines } from '~/contexts/RoutinesContext';
 
 export default function WorkoutPlan() {
   const { selectedExercises } = useExercise();
-  const { routines, addRoutine } = useRoutines();
+  const { addRoutine } = useRoutines();
 
   const params = useLocalSearchParams();
   const namePlan = Array.isArray(params.namePlan) ? params.namePlan[0] : params.namePlan;
@@ -22,6 +22,10 @@ export default function WorkoutPlan() {
       console.error('Name plan is undefined');
     }
   };
+
+  // console.log('=============WorkoutPlan============');
+  // console.log(selectedExercises);
+  // console.log('====================================');
 
   return (
     <Container>

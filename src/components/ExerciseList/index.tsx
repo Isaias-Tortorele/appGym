@@ -5,8 +5,12 @@ import { Avatar, AvatarImage } from '../ui/Avatar';
 
 type DataProps = {
   id: string;
-  url_gif: string;
   name: string;
+  type: string;
+  url_gif: string;
+  series: number;
+  repetition: string;
+  member: string;
 };
 
 type ExerciseListProps = {
