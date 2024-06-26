@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { cn } from '../../lib/utils';
@@ -25,13 +24,13 @@ function Checkbox({
       <TouchableOpacity onPress={onToggle}>
         <View
           className={cn(
-            'bg-background flex h-4 w-4 items-center justify-center rounded border border-gray-700',
+            'bg-background flex h-4 w-4 items-center justify-center rounded border-2 border-gray-400',
             {
-              'bg-foreground': isChecked,
+              'border-0 bg-none': isChecked,
             },
             checkboxClasses
           )}>
-          {isChecked && <Text className="text-background text-lg">✓</Text>}
+          {isChecked && <Text className="text-background text-lg">✔</Text>}
         </View>
       </TouchableOpacity>
       {label && <Text className={cn('text-primary', labelClasses)}>{label}</Text>}
