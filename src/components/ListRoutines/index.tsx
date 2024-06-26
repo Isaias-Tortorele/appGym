@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import Button from '../Button';
 import { useRoutines } from '~/contexts/RoutinesContext';
+import { useRouter } from 'expo-router';
 
 type Exercise = {
   id: string;
@@ -16,6 +17,22 @@ type Routine = {
 
 export default function ListRoutines() {
   const { routines } = useRoutines();
+  const router = useRouter();
+
+  const handleStartWorkout = (routine: Routine) => {
+    const encodedRoutine = JSON.stringify({
+      ...routine,
+      exercises: routine.exercises.map((exercise) => ({
+        ...exercise,
+        url_gif: encodeURIComponent(exercise.url_gif),
+      })),
+    });
+
+    router.push({
+      pathname: '/workoutDetail',
+      params: { routine: encodedRoutine },
+    });
+  };
 
   return (
     <>
@@ -29,7 +46,12 @@ export default function ListRoutines() {
               {routine.exercises.map((exercise) => exercise.name).join(', ')}
             </Text>
           </View>
-          <Button titleButton="Iniciar treino" className="-mt-5" borderColor="border-border-800" />
+          <Button
+            titleButton="Iniciar treino"
+            className="-mt-5"
+            borderColor="border-border-800"
+            onPress={() => handleStartWorkout(routine)}
+          />
         </View>
       ))}
     </>
