@@ -13,25 +13,26 @@ type MuscleGroupProps = {
 interface ModalProps {
   visible: boolean;
   onClose: () => void;
+  onFilter: (filters: string[]) => void;
   children?: React.ReactNode;
 }
 
 const muscleGroups: MuscleGroupProps[] = [
-  { id: '1', name: 'abdome', icon: 'user' },
-  { id: '2', name: 'aeróbico', icon: 'bicycle' },
-  { id: '3', name: 'antebraço', icon: 'hand-paper' },
-  { id: '4', name: 'bíceps', icon: 'hand-rock' },
-  { id: '5', name: 'costas', icon: 'male' },
-  { id: '6', name: 'glúteo', icon: 'female' },
-  { id: '7', name: 'ombro', icon: 'user-circle' },
-  { id: '8', name: 'panturrilha', icon: 'child' },
-  { id: '9', name: 'peito', icon: 'heartbeat' },
-  { id: '10', name: 'pernas', icon: 'blind' },
-  { id: '11', name: 'trapézio', icon: 'wheelchair' },
-  { id: '12', name: 'tríceps', icon: 'thumbs-up' },
+  { id: 'abdominal', name: 'Abdômen', icon: 'user' },
+  { id: 'cardio', name: 'Aeróbico', icon: 'bicycle' },
+  { id: 'antebraco', name: 'Antebraço', icon: 'hand-paper' },
+  { id: 'biceps', name: 'Bíceps', icon: 'hand-rock' },
+  { id: 'costas', name: 'Costas', icon: 'male' },
+  { id: 'gluteo', name: 'Glúteo', icon: 'female' },
+  { id: 'ombro', name: 'Ombro', icon: 'user-circle' },
+  { id: 'panturrilha', name: 'Panturrilha', icon: 'child' },
+  { id: 'peito', name: 'Peito', icon: 'heartbeat' },
+  { id: 'perna', name: 'Perna', icon: 'blind' },
+  { id: 'trapezio', name: 'Trapézio', icon: 'wheelchair' },
+  { id: 'triceps', name: 'Tríceps', icon: 'thumbs-up' },
 ];
 
-export default function CustomModal({ visible, onClose, children }: ModalProps) {
+export default function CustomModal({ visible, onClose, onFilter, children }: ModalProps) {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   const toggleFilter = (filter: string) => {
@@ -44,6 +45,11 @@ export default function CustomModal({ visible, onClose, children }: ModalProps) 
 
   const clearFilter = () => {
     setSelectedFilters([]);
+  };
+
+  const handleFilter = () => {
+    onFilter(selectedFilters);
+    onClose();
   };
 
   return (
@@ -93,6 +99,7 @@ export default function CustomModal({ visible, onClose, children }: ModalProps) 
             className="w-4/5"
             touchableStyle="bg-cyan-400 border-none"
             textStyle="text-white"
+            onPress={handleFilter}
           />
         </View>
       </View>

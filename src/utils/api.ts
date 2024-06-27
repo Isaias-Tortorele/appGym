@@ -33,12 +33,15 @@ export const getAllExercises = async (page: number, limit: number) => {
   }
 };
 
-export const getExercises = async () => {
+// Função para buscar exercícios por grupo muscular
+export const getExercisesByMuscleGroup = async (muscleGroup: string) => {
   try {
-    const response = await api.get('/abdominal');
+    const response = await api.get(`/${muscleGroup}`);
+    console.log(response.data);
+
     return response.data;
   } catch (error) {
-    console.error('Error fetching exercises:', error);
-    throw error;
+    // console.error('Error fetching exercises by muscle group:', error);
+    // throw error;
   }
 };

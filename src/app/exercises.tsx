@@ -9,7 +9,7 @@ import { Input } from '~/components/ui/Input';
 import { useRouter } from 'expo-router';
 import { useExercise } from '~/contexts/ExerciseContext';
 
-import { getAllExercises } from '~/utils/api';
+import { getAllExercises, getExercisesByMuscleGroup } from '~/utils/api';
 
 type Exercise = {
   id: string;
@@ -31,6 +31,7 @@ export default function Exercises() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [selectedMuscleGroups, setSelectedMuscleGroups] = useState<string[]>([]);
 
   const { selectedExercises, toggleExerciseSelection } = useExercise();
 
@@ -47,7 +48,15 @@ export default function Exercises() {
   const fetchExercises = async (page: number) => {
     setLoading(true);
     try {
-      const exercisesData = await getAllExercises(page, 10);
+      let exercisesData: Exercise[] = [];
+      if (selectedMuscleGroups.length > 0) {
+        for (const muscleGroup of selectedMuscleGroups) {
+          const data = await getExercisesByMuscleGroup(muscleGroup);
+          exercisesData = [...exercisesData, ...data];
+        }
+      } else {
+        exercisesData = await getAllExercises(page, 10);
+      }
       if (exercisesData.length > 0) {
         setExercises((prevExercises) => [...prevExercises, ...exercisesData]);
       } else {
@@ -62,12 +71,19 @@ export default function Exercises() {
 
   useEffect(() => {
     fetchExercises(page);
-  }, [page]);
+  }, [page, selectedMuscleGroups]);
 
   const handleLoadMore = () => {
     if (!loading && hasMore) {
       setPage((prevPage) => prevPage + 1);
     }
+  };
+
+  const handleFilter = (filters: string[]) => {
+    setSelectedMuscleGroups(filters);
+    setExercises([]);
+    setPage(1);
+    setHasMore(true);
   };
 
   return (
@@ -126,7 +142,7 @@ export default function Exercises() {
         />
       </View>
 
-      <CustomModal visible={modalVisible} onClose={closeModal} />
+      <CustomModal visible={modalVisible} onClose={closeModal} onFilter={handleFilter} />
     </Container>
   );
 }
