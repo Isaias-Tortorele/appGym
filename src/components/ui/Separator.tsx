@@ -1,6 +1,6 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 
-export default function Separator() {
-  return <View className="w-4/5 border mx-auto border-border-400 m-5" />;
+export function Separator() {
+  return <View className="m-5 mx-auto w-4/5 border border-border-400" />;
 }

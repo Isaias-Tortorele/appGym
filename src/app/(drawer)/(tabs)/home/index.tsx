@@ -1,5 +1,5 @@
-import Button from '~/components/Button';
-import Container from '~/components/ui/Container';
+import { Button } from '~/components/Button';
+import { Container } from '~/components/ui/Container';
 import Menu from '~/components/Menu';
 import LastWorkout from '~/components/LastWorkout';
 import ListRoutines from '~/components/ListRoutines';

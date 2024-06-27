@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TextInput } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { Avatar, AvatarImage } from '~/components/ui/Avatar';
-import Container from '~/components/ui/Container';
+import { Container } from '~/components/ui/Container';
 import { Checkbox } from '~/components/ui/Checkbox';
-import Separator from '~/components/ui/Separator';
+import { Separator } from '~/components/ui/Separator';
+import { Button } from '~/components/Button';
 
 type Exercise = {
   id: string;
@@ -48,7 +49,7 @@ export default function WorkoutDetail() {
                 <Text className="text-xl font-semibold">{exercise.name}</Text>
               </View>
 
-              <View className="flex-row items-center justify-between py-2 px-5">
+              <View className="flex-row items-center justify-between px-5 py-2">
                 <Text className=" font-semibold">Tempo de descanso: </Text>
                 <Text>1:30s</Text>
               </View>
@@ -61,9 +62,22 @@ export default function WorkoutDetail() {
                     className={`flex-row items-center justify-between py-2 ${index % 2 === 1 ? 'bg-slate-200 px-5' : 'bg-white px-5'}`}>
                     <Text className="text-lg font-semibold">Série {index + 1}</Text>
                     <Text className="text-lg">-</Text>
-                    <Text className="text-lg font-semibold">{exercise.repetition} reps </Text>
-                    <Text className="text-lg">x</Text>
-                    <Text className="text-lg font-semibold">20 Kg</Text>
+
+                    <View className="flex-row items-center justify-center">
+                      <TextInput
+                        placeholder="0"
+                        className="font-semibold placeholder:rounded-md placeholder:bg-slate-300 placeholder:p-0.5 placeholder:text-center"
+                      />
+
+                      <Text> reps</Text>
+                      <Text className="px-8 text-lg"> x </Text>
+
+                      <TextInput
+                        placeholder="0"
+                        className="font-semibold placeholder:rounded-md placeholder:bg-slate-300 placeholder:p-0.5 placeholder:text-center"
+                      />
+                      <Text> Kg</Text>
+                    </View>
 
                     <Checkbox
                       checkboxClasses="w-7 h-7"
@@ -77,6 +91,12 @@ export default function WorkoutDetail() {
             </View>
           ))}
         </View>
+        <Button
+          titleButton="Finalizar Treino"
+          className="mb-10 bg-buttonColor-500"
+          touchableStyle="border-0"
+          textStyle="text-white"
+        />
       </Container>
     </ScrollView>
   );

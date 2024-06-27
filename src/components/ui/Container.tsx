@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-export default function ({ children }: { children: React.ReactNode }) {
+export function Container({ children }: { children: React.ReactNode }) {
   return <View className={styles.container}>{children}</View>;
 }
 

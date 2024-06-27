@@ -10,7 +10,7 @@ interface ButtonProps extends TouchableOpacityProps {
   borderColor?: string;
 }
 
-export default function Button({
+export function Button({
   onPress,
   title,
   titleButton,

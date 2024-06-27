@@ -1,7 +1,7 @@
 import React from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
-import Container from '~/components/ui/Container';
-import Button from '~/components/Button';
+import { Container } from '~/components/ui/Container';
+import { Button } from '~/components/Button';
 import { ScrollView, Text, View } from 'react-native';
 import { Avatar, AvatarImage } from '~/components/ui/Avatar';
 import { useExercise } from '~/contexts/ExerciseContext';

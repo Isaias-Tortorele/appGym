@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Button from '../Button';
+import { Button } from '../Button';
 import { useRoutines } from '~/contexts/RoutinesContext';
 import { useRouter } from 'expo-router';
 

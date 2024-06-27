@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
-import Container from '~/components/ui/Container';
+import { Container } from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
 import CustomModal from '~/components/Modal';
 import GoBack from '~/components/GoBack';
-import Button from '~/components/Button';
+import { Button } from '~/components/Button';
 import { Input } from '~/components/ui/Input';
 import { useRouter } from 'expo-router';
 import { useExercise } from '~/contexts/ExerciseContext';
