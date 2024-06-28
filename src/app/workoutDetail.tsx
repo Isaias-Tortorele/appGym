@@ -12,6 +12,7 @@ type Exercise = {
   name: string;
   type: string;
   url_gif: string;
+  url_photo: string;
   series: number;
   repetition: string;
   member: string;
