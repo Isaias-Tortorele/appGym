@@ -23,10 +23,6 @@ export default function WorkoutPlan() {
     }
   };
 
-  // console.log('=============WorkoutPlan============');
-  // console.log(selectedExercises);
-  // console.log('====================================');
-
   return (
     <Container>
       <View className="mt-20">
@@ -39,7 +35,7 @@ export default function WorkoutPlan() {
               <View className="h-16 flex-row items-center justify-between">
                 <View className="flex flex-row items-center justify-center gap-4">
                   <Avatar className="h-14 w-14">
-                    <AvatarImage source={{ uri: exercise.url_gif }} resizeMode="cover" />
+                    <AvatarImage source={{ uri: exercise?.url_photo }} resizeMode="cover" />
                   </Avatar>
                   <Text className="text-lg font-semibold">{exercise.name}</Text>
                 </View>

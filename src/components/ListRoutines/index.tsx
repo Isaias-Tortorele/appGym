@@ -8,6 +8,7 @@ type Exercise = {
   id: string;
   name: string;
   url_gif: string;
+  url_photo: string;
 };
 
 type Routine = {
@@ -25,6 +26,7 @@ export default function ListRoutines() {
       exercises: routine.exercises.map((exercise) => ({
         ...exercise,
         url_gif: encodeURIComponent(exercise.url_gif),
+        url_photo: encodeURIComponent(exercise.url_photo),
       })),
     });
 

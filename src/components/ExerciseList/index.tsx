@@ -34,7 +34,10 @@ export default function ExerciseList({
       <View className="h-16 flex-row items-center justify-between">
         <View className="flex flex-row items-center justify-center gap-4">
           <Avatar className="h-14 w-14">
-            <AvatarImage source={{ uri: data.url_gif }} resizeMode="cover" />
+            <AvatarImage
+              source={{ uri: data.url_photo ? data.url_photo : 'vazio' }}
+              resizeMode="cover"
+            />
           </Avatar>
           <Text className="w-60 text-lg font-semibold" numberOfLines={1} ellipsizeMode="tail">
             {data.name}

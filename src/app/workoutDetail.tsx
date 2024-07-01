@@ -32,7 +32,7 @@ export default function WorkoutDetail() {
       [key]: !prevState[key],
     }));
 
-    console.log(key);
+    // console.log(key);
   };
 
   return (
@@ -45,13 +45,13 @@ export default function WorkoutDetail() {
             <View key={exercise.id}>
               <View className="flex-row items-center gap-4">
                 <Avatar className="h-14 w-14">
-                  <AvatarImage source={{ uri: exercise.url_gif }} />
+                  <AvatarImage source={{ uri: exercise?.url_photo }} />
                 </Avatar>
-                <Text className="text-xl font-semibold">{exercise.name}</Text>
+                <Text className="flex-1 text-xl font-semibold">{exercise.name} </Text>
               </View>
 
               <View className="flex-row items-center justify-between px-5 py-2">
-                <Text className=" font-semibold">Tempo de descanso: </Text>
+                <Text className="font-semibold">Tempo de descanso: </Text>
                 <Text>1:30s</Text>
               </View>
 
@@ -66,7 +66,7 @@ export default function WorkoutDetail() {
 
                     <View className="flex-row items-center justify-center">
                       <TextInput
-                        placeholder="0"
+                        placeholder={exercise.repetition}
                         className="font-semibold placeholder:rounded-md placeholder:bg-slate-300 placeholder:p-0.5 placeholder:text-center"
                       />
 
