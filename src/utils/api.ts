@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 // Função para buscar exercícios por página
-export const getAllExercises = async (page: number, limit: number) => {
+export const getAllExercises = async () => {
   try {
     const response = await api.get('/exercicios');
     const allExercises: any[] = [];
@@ -22,11 +22,7 @@ export const getAllExercises = async (page: number, limit: number) => {
       }
     }
 
-    // Paginar os exercícios
-    const startIndex = (page - 1) * limit;
-    const paginatedExercises = allExercises.slice(startIndex, startIndex + limit);
-
-    return paginatedExercises;
+    return allExercises;
   } catch (error) {
     console.error('Error fetching exercises by page:', error);
     throw error;
@@ -41,7 +37,7 @@ export const getExercisesByMuscleGroup = async (muscleGroup: string) => {
 
     return response.data;
   } catch (error) {
-    // console.error('Error fetching exercises by muscle group:', error);
-    // throw error;
+    console.error('Error fetching exercises by muscle group:', error);
+    throw error;
   }
 };

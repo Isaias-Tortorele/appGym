@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Container } from '~/components/ui/Container';
 import ExerciseList from '~/components/ExerciseList';
 import CustomModal from '~/components/Modal';
 import GoBack from '~/components/GoBack';
+import { Container } from '~/components/ui/Container';
 import { Button } from '~/components/Button';
 import { Input } from '~/components/ui/Input';
 import { useRouter } from 'expo-router';
@@ -29,9 +29,7 @@ export default function Exercises() {
   const [namePlan, setNamePlan] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState<string[]>([]);
 
   const { selectedExercises, toggleExerciseSelection } = useExercise();
@@ -46,7 +44,7 @@ export default function Exercises() {
     });
   };
 
-  const fetchExercises = async (page: number) => {
+  const fetchExercises = async () => {
     setLoading(true);
     try {
       let exercisesData: Exercise[] = [];
@@ -56,12 +54,10 @@ export default function Exercises() {
           exercisesData = [...exercisesData, ...data];
         }
       } else {
-        exercisesData = await getAllExercises(page, 10);
+        exercisesData = await getAllExercises();
       }
       if (exercisesData.length > 0) {
         setExercises((prevExercises) => [...prevExercises, ...exercisesData]);
-      } else {
-        setHasMore(false);
       }
     } catch (error) {
       console.error('Error fetching exercises:', error);
@@ -71,20 +67,12 @@ export default function Exercises() {
   };
 
   useEffect(() => {
-    fetchExercises(page);
-  }, [page, selectedMuscleGroups]);
-
-  const handleLoadMore = () => {
-    if (!loading && hasMore) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+    fetchExercises();
+  }, [selectedMuscleGroups]);
 
   const handleFilter = (filters: string[]) => {
     setSelectedMuscleGroups(filters);
     setExercises([]);
-    setPage(1);
-    setHasMore(true);
   };
 
   return (
@@ -115,33 +103,36 @@ export default function Exercises() {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        className="h-4/6"
-        contentContainerStyle={{ paddingBottom: 60 }}
-        showsVerticalScrollIndicator={false}
-        data={exercises}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ExerciseList
-            data={item}
-            selectedExercises={selectedExercises}
-            toggleExerciseSelection={toggleExerciseSelection}
-          />
-        )}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={loading ? <ActivityIndicator size="large" color="#0000ff" /> : null}
-      />
-
-      <View className="absolute bottom-0 w-full items-center pb-5">
-        <Button
-          titleButton="Adicionar exercícios"
-          className="w-4/5"
-          touchableStyle="bg-cyan-400 border-none"
-          textStyle="text-white"
-          onPress={handleAddExercises}
+      {loading ? (
+        <ActivityIndicator size="large" className="border-border-800" />
+      ) : (
+        <FlatList
+          className="h-4/6"
+          contentContainerStyle={{ paddingBottom: 60 }}
+          showsVerticalScrollIndicator={false}
+          data={exercises}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ExerciseList
+              data={item}
+              selectedExercises={selectedExercises}
+              toggleExerciseSelection={toggleExerciseSelection}
+            />
+          )}
         />
-      </View>
+      )}
+
+      {selectedExercises.length != 0 && (
+        <View className="absolute bottom-0 w-full items-center pb-5">
+          <Button
+            titleButton="Adicionar exercícios"
+            className="w-4/5"
+            touchableStyle="bg-cyan-400 border-none"
+            textStyle="text-white"
+            onPress={handleAddExercises}
+          />
+        </View>
+      )}
 
       <CustomModal visible={modalVisible} onClose={closeModal} onFilter={handleFilter} />
     </Container>
